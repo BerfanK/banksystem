@@ -4,8 +4,13 @@
     <?php include_once "components/head.php"; ?>
 
     <body>
-        <h1>Hello world.</h1>
+        <?php include_once "components/navbar.php"; ?>
 
+        <div class="container mt-5">
+
+           
+
+        </div>
 
         <?php include_once "components/scripts.php"; ?>
     </body>
