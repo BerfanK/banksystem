@@ -8,11 +8,9 @@
 
         <div class="container my-5">
 
-            <div class="page-title">Ihre Konten im Überblick</div>
-            <div class="page-description">Erhalten Sie Einblick in Ihre Konten.</div>
+            <div class="page-title">Ihre Karten</div>
+            <div class="page-description">Hier können Sie Ihre Karten verwalten.</div>
             <hr class="page-divider">
-
-            <div class="section-title">KONTO DETAILS</div>
 
           
 

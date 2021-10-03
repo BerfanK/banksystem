@@ -1,3 +1,10 @@
+<?php
+
+$path = substr($_SERVER['SCRIPT_NAME'], 1);
+$filename = basename($path, ".php");
+
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark mt-2">
     <div class="container">
 
@@ -10,23 +17,23 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./">Übersicht</a>
+                    <a class="nav-link <?php if ($filename === 'index') echo "active"; ?>" href="./">Übersicht</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="./cards">Karten</a>
+                    <a class="nav-link <?php if ($filename === 'cards') echo "active"; ?>" href="./cards">Karten</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="./transactions">Transaktionen</a>
+                    <a class="nav-link <?php if ($filename === 'transactions') echo "active"; ?>" href="./transactions">Transaktionen</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="./status">Statusmeldungen</a>
+                    <a class="nav-link <?php if ($filename === 'status') echo "active"; ?>" href="./status">Statusmeldungen</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="./help">Support</a>
+                    <a class="nav-link <?php if ($filename === 'help') echo "active"; ?>" href="./help">Support</a>
                 </li>
 
             </ul>

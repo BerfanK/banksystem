@@ -8,11 +8,9 @@
 
         <div class="container my-5">
 
-            <div class="page-title">Ihre Konten im Überblick</div>
-            <div class="page-description">Erhalten Sie Einblick in Ihre Konten.</div>
+            <div class="page-title">Ihre Transaktionen</div>
+            <div class="page-description">Hier haben Sie einen Einblick auf Ihre Bewegungen.</div>
             <hr class="page-divider">
-
-            <div class="section-title">KONTO DETAILS</div>
 
           
 

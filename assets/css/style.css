@@ -3,6 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap");
 
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   position: relative;
   top: 0;
@@ -10,6 +16,12 @@ body {
   margin: 0;
   padding: 0;
   background-color: #0a1730;
+
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box; /* So the width will be 100% + 17px */
 }
 
 .nav-link {
@@ -22,4 +34,84 @@ body {
 
 .dropdown-menu {
   font-size: 13px !important;
+}
+
+.page-title {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+.page-description {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgb(170, 170, 170);
+}
+
+.page-divider {
+  color: white;
+  margin: 1rem 0 5rem 0;
+}
+
+.section-title {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(170, 170, 170);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.section-title:after {
+  display: inline-block;
+  content: "";
+  height: 3px;
+  background: rgb(170, 170, 170);
+  position: absolute;
+  width: 30%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: 10px;
+  margin-left: 2rem;
+}
+
+.section-card-primary {
+  background-color: #4f29dc;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.section-card-danger {
+  background-color: #ac2424;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.section-card-primary:hover,
+.section-card-danger:hover {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.section-card-tag {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: white;
+}
+
+.section-card-title {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: white;
+}
+
+.section-card-text {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(231, 231, 231);
 }

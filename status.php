@@ -8,11 +8,9 @@
 
         <div class="container my-5">
 
-            <div class="page-title">Ihre Konten im Überblick</div>
-            <div class="page-description">Erhalten Sie Einblick in Ihre Konten.</div>
+            <div class="page-title">BBK Status</div>
+            <div class="page-description">Ist ein Service down? Hier erfahren Sie es.</div>
             <hr class="page-divider">
-
-            <div class="section-title">KONTO DETAILS</div>
 
           
 
