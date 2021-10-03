@@ -52,7 +52,7 @@ body {
 
 .page-divider {
   color: white;
-  margin: 1rem 0 5rem 0;
+  margin: 1rem 0 2rem 0;
 }
 
 .section-title {
@@ -114,4 +114,70 @@ body {
   font-size: 13px;
   font-weight: 400;
   color: rgb(231, 231, 231);
+}
+
+.embed-info {
+  border: 0;
+  border-left: 5px solid rgb(208, 236, 48);
+  border-radius: 5px;
+  margin: 3rem 0 3rem 0;
+}
+
+.embed-text {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: rgb(219, 219, 219);
+  margin-left: 1rem;
+}
+
+.bg-blurple {
+  background-color: #221a41;
+  border: 1px solid black;
+}
+
+.transaction-header {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  margin-bottom: 2rem;
+}
+
+.transaction-sender {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+
+.transaction-amount {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.transaction-receiver {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.transaction-link {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: rgb(104, 104, 190);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  transition: 0.3s;
+}
+
+.transaction-link:hover {
+  color: rgb(105, 105, 189);
+  transition: 0.3s;
 }
