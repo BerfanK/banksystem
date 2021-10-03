@@ -1,2 +1,0 @@
-# banksystem
- Banking PHP project.
