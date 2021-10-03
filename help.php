@@ -9,7 +9,7 @@
         <div class="container my-5">
 
             <div class="page-title">Kontaktieren Sie uns</div>
-            <div class="page-description">Hier haben Sie die Möglichkeit uns zu kontaktieren.</div>
+            <div class="page-description">Hier können Sie uns kontaktieren.</div>
             <hr class="page-divider">
 
           
