@@ -37,7 +37,7 @@
                         Max Mustermann
                     </span>
 
-                    gesendet. <a href="" class="transaction-link">Transaktionsdetails anzeigen.</a>
+                    gesendet. <a href="./tx/10c023b75403403d82cb8" class="transaction-link">Transaktionsdetails anzeigen.</a>
                 </div>
                 <div class="card-footer border-0" style="background-color: inherit">
                     <i class="far fa-clock" style="width: 1.5%"></i>&nbsp; Transaktion wurde ausgeführt am 29. September 2021 (T-65276556)

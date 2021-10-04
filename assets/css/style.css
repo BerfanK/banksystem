@@ -181,3 +181,61 @@ body {
   color: rgb(105, 105, 189);
   transition: 0.3s;
 }
+
+.status {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.status-item {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: rgb(219, 219, 219);
+}
+
+.status-title {
+  margin: 5rem 0 3rem 0;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  font-weight: 600;
+  color: rgb(219, 219, 219);
+}
+
+.status-date {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: rgb(219, 219, 219);
+}
+
+.status-incident {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: rgb(138, 138, 138);
+}
+
+.status-incident-date {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgb(161, 161, 161);
+}
+
+.tx-icon {
+  font-size: 18px;
+}
+
+.tx-item {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+}
+
+.tx-value {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: rgb(138, 138, 138);
+  width: auto;
+}
