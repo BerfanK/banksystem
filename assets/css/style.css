@@ -135,6 +135,15 @@ body {
   border: 1px solid black;
 }
 
+.bg-darker {
+  background-color: #221a41;
+  border: 1px solid black;
+}
+
+.text-gray {
+  color: rgb(197, 197, 197);
+}
+
 .transaction-header {
   font-family: "Lato", Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -150,6 +159,7 @@ body {
   font-size: 17px;
   font-weight: 600;
   margin-right: 0.3rem;
+  color: white;
 }
 
 .transaction-amount {
@@ -166,6 +176,7 @@ body {
   font-weight: 600;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+  color: white;
 }
 
 .transaction-link {
@@ -238,4 +249,214 @@ body {
   font-size: 15px;
   color: rgb(138, 138, 138);
   width: auto;
+}
+
+.card-icon {
+  font-size: 18px;
+}
+
+.card-name {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card-description {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: rgb(144, 144, 144);
+}
+
+.card-balance {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card-dropdown {
+  font-size: 16px !important;
+}
+
+.home-image {
+  -webkit-animation: action 2s infinite alternate;
+  animation: action 2s infinite alternate;
+}
+
+@-webkit-keyframes action {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes action {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.home-title {
+  margin-top: 8rem;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+}
+
+.home-text {
+  margin-top: 0.7rem;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(194, 194, 194);
+}
+
+.help-title {
+  margin-top: 2rem;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+.help-description {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(180, 180, 180);
+
+  display: inline-block;
+  width: 30%;
+}
+
+.help-time {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(180, 180, 180);
+}
+
+.profile-title {
+  margin-top: 4rem;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+.profile-label {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(179, 179, 179);
+  text-transform: uppercase;
+}
+
+.profile-input,
+.profile-input:active,
+.profile-input:focus {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  background-color: #0a1730;
+  color: white;
+}
+
+.profile-setting-title {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+}
+
+.profile-setting-text {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgb(209, 209, 209);
+}
+
+.profile-setting-button {
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.btn-save {
+  background-color: #1b325d;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #192c50;
+  color: white;
+}
+
+.btn-github {
+  margin-top: 0.2rem;
+  background-color: #1e2024;
+  color: rgb(175, 43, 43);
+  border: 1px solid rgb(83, 83, 83);
+}
+
+.btn-github:hover {
+  background-color: rgb(175, 43, 43);
+  color: white;
+}
+
+.new-card-label {
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: rgb(179, 179, 179);
+  margin-bottom: 0.2rem;
+}
+
+.payment-input,
+.payment-input:active,
+.payment-input:focus {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  background-color: #0a1730;
+  color: white;
+}
+
+.card-details-title {
+  margin-top: 4rem;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+.link {
+  color: rgb(105, 105, 189);
+  transition: 0.3s;
+  margin-right: 0.5rem;
+}
+
+.link:hover {
+  color: rgb(138, 138, 226);
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.login-info {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: rgb(218, 218, 218);
+}
+
+.login-info a {
+  text-decoration: none;
+  color: rgb(105, 105, 189);
+  transition: 0.3s;
+}
+
+.login-info a:hover {
+  text-decoration: underline;
+  color: rgb(138, 138, 226);
+  transition: 0.3s;
 }

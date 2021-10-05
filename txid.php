@@ -77,11 +77,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="../status">Statusmeldungen</a>
+                            <a class="nav-link" href="../status">Status</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="../help">Support</a>
+                            <a class="nav-link" href="../help">Kontakt</a>
                         </li>
 
                     </ul>
@@ -98,8 +98,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="../profile"><i class="fas fa-user fs-6 me-1"></i>&nbsp; Profil</a></li>
-                                <li><a class="dropdown-item" href="../profile/create-card"><i class="fas fa-plus fs-6 me-1"></i></i>&nbsp; Karte erstellen</a></li>
-                                <li><a class="dropdown-item" href="../profile/settings"><i class="fas fa-cog fs-6 me-1"></i>&nbsp; Einstellungen</a></li>
+                                <li><a class="dropdown-item" href="../new-card"><i class="fas fa-plus fs-6 me-1"></i></i>&nbsp; Karte eröffnen</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="../logout"><i class="fas fa-power-off fs-6 me-1"></i>&nbsp; Abmelden</a></li>
                             </ul>

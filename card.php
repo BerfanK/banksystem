@@ -8,25 +8,18 @@
 
         <div class="container my-5">
 
-            <div class="page-title">Ihre Transaktionen</div>
-            <div class="page-description">Hier haben Sie einen Einblick auf Bewegungen.</div>
+            <div class="page-title">BBK Privatkonto</div>
+            <div class="page-description">CH61 0023 3233 2442 5840 R</div>
             <hr class="page-divider">
 
-            <div class="embed-info">
-                <div class="embed-text">💡&nbsp; Klicken Sie auf eine Transaktion für <u>mehr</u> Details!</div>
-            </div>
+            <a href="./payment?action=new" class="link">Neue Zahlung</a>
+            <a href="./card?id=4" class="link">Transaktionen</a>
+            <a href="./payment?action=exchange" class="link">Kontoübertrag</a>
 
-            
-            <!-- 
-            <div class="page-title text-warning fw-bold fs-5">
-                <i class="far fa-minus-square text-danger"></i>&nbsp; Es scheint als hätten Sie noch keine Transaktionen.
-            </div>
-            -->
-            
+            <div class="card-details-title" style="margin-top: 2rem;">Kontosaldo: &nbsp;<u>CHF 322,80</u></div>
+            <div class="profile-title">Transaktionen</div>
 
-            <div class="transaction-header">1. September - 30. September 2021</div>
-
-            <div class="card bg-darker mb-4">
+            <div class="card bg-darker mt-4">
                 <div class="card-body text-gray">
                     <span class="transaction-sender">
                         <i class="fas fa-minus text-danger"  style="width: 1.5%"></i>&nbsp; Sie
@@ -46,31 +39,31 @@
 
                     gesendet. <a href="./tx/10c023b75403403d82cb8" class="transaction-link">Transaktionsdetails anzeigen.</a><br>
                     <i class="far fa-clock" style="width: 1.5%"></i>&nbsp; Transaktion wurde ausgeführt am 29. September 2021 (T-65276556)<br>
-                    <i class="far fa-credit-card" style="width: 1.5%"></i>&nbsp; BBK Privatkonto
+                    <i class="far fa-credit-card" style="width: 1.5%"></i>&nbsp; BBK Privatkonto <b>S. </b> CHF 322,80
                 </div>
             </div>
 
-            <div class="card bg-darker mb-4">
+            <div class="card bg-darker mt-4">
                 <div class="card-body text-gray">
                     <span class="transaction-sender">
-                        <i class="fas fa-plus text-success"  style="width: 1.5%"></i>&nbsp; Sie
+                        <i class="fas fa-minus text-danger"  style="width: 1.5%"></i>&nbsp; Sie
                     </span>
 
                     haben
 
-                    <span class="transaction-amount text-success">
-                        CHF 50,00
+                    <span class="transaction-amount text-danger">
+                        CHF 74,00
                     </span>
 
-                    von 
+                    an 
 
                     <span class="transaction-receiver">
                         Max Mustermann
                     </span>
 
-                    erhalten. <a href="./tx/10c023b75403403d82cb8" class="transaction-link">Transaktionsdetails anzeigen.</a><br>
-                    <i class="far fa-clock" style="width: 1.5%"></i>&nbsp; Transaktion wurde ausgeführt am 26. September 2021 (T-65276556)<br>
-                    <i class="far fa-credit-card" style="width: 1.5%"></i>&nbsp; BBK Prepaidkonto
+                    gesendet. <a href="./tx/10c023b75403403d82cb8" class="transaction-link">Transaktionsdetails anzeigen.</a><br>
+                    <i class="far fa-clock" style="width: 1.5%"></i>&nbsp; Transaktion wurde ausgeführt am 29. September 2021 (T-65276556)<br>
+                    <i class="far fa-credit-card" style="width: 1.5%"></i>&nbsp; BBK Privatkonto <b>S. </b> CHF 347,80
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ $filename = basename($path, ".php");
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($filename === 'cards') echo "active"; ?>" href="./cards">Karten</a>
+                    <a class="nav-link <?php if ($filename === 'cards' || $filename === 'payment' || $filename === 'card') echo "active"; ?>" href="./cards">Karten</a>
                 </li>
 
                 <li class="nav-item">
@@ -29,11 +29,11 @@ $filename = basename($path, ".php");
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($filename === 'status') echo "active"; ?>" href="./status">Statusmeldungen</a>
+                    <a class="nav-link <?php if ($filename === 'status') echo "active"; ?>" href="./status">Status</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($filename === 'help') echo "active"; ?>" href="./help">Support</a>
+                    <a class="nav-link <?php if ($filename === 'help') echo "active"; ?>" href="./help">Kontakt</a>
                 </li>
 
             </ul>
@@ -45,13 +45,12 @@ $filename = basename($path, ".php");
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link <?php if ($filename === 'profile' || $filename === 'new-card') echo "active"; ?>" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle fs-5"></i>&nbsp; Berfan K.
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="./profile"><i class="fas fa-user fs-6 me-1"></i>&nbsp; Profil</a></li>
-                        <li><a class="dropdown-item" href="./profile/create-card"><i class="fas fa-plus fs-6 me-1"></i></i>&nbsp; Karte erstellen</a></li>
-                        <li><a class="dropdown-item" href="./profile/settings"><i class="fas fa-cog fs-6 me-1"></i>&nbsp; Einstellungen</a></li>
+                        <li><a class="dropdown-item" href="./new-card"><i class="fas fa-plus fs-6 me-1"></i></i>&nbsp; Karte eröffnen</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./logout"><i class="fas fa-power-off fs-6 me-1"></i>&nbsp; Abmelden</a></li>
                     </ul>
