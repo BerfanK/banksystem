@@ -31,5 +31,7 @@
     <!-- Title -->
     <title>BBK | Deine Online-Bank! E-Banking war noch nie so einfach </title>
 
+    <?php include_once "includes/connection.php"; ?>
+    <?php include_once "includes/methods.php"; ?>
 
 </head>

@@ -22,8 +22,8 @@
                         <form autocomplete="off" class="needs-validation" method="post" novalidate>
                         
                             <div class="form-group mb-1">
-                                <label for="vertragsnummer" class="new-card-label">Vertragsnummer &nbsp;</b><span class="text-danger">*</span></b></label>
-                                <input type="number" class="form-control profile-input shadow-none rounded-0" name="vertragsnummer" placeholder="Ihre Vertragsnummer ..." required>
+                                <label for="contractNumber" class="new-card-label">Vertragsnummer &nbsp;</b><span class="text-danger">*</span></b></label>
+                                <input type="number" class="form-control profile-input shadow-none rounded-0" name="contractNumber" placeholder="Ihre Vertragsnummer ..." required>
                                 <div class="invalid-feedback">
                                     Bitte füllen Sie dieses Feld aus!
                                 </div>
@@ -45,6 +45,14 @@
                             ?>
 
                             <span class="login-info"><a href="./recover">Passwort vergessen?</a></span>
+
+                            <?php
+
+                            if (isset($_POST["submit"]) && !empty($_POST["contractNumber"]) && !empty($_POST["password"])) {
+                                login($_POST["contractNumber"], $_POST["password"]);
+                            }
+
+                            ?>
 
                             <div class="form-group mb-2 mt-4">
                                 <button type="submit" class="w-100 btn btn-success opacity-75 shadow-none rounded-0" name="submit">Anmelden</button>
