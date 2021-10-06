@@ -25,41 +25,41 @@
                         <div class="row">
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
-                                <label for="vorname" class="form-label profile-label">Vorname</label>
+                                <label for="vorname" class="form-label profile-label">Vorname <span class="text-danger"><b>*</b></span></label>
                                 <input type="text" name="vorname" class="form-control profile-input shadow-none" value="" placeholder="Maximilian" required>
                             </div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
-                                <label for="nachname" class="form-label profile-label">Nachname</label>
+                                <label for="nachname" class="form-label profile-label">Nachname <span class="text-danger"><b>*</b></span></label>
                                 <input type="text" name="nachname" class="form-control profile-input shadow-none" value="" placeholder="Mustermann" required>
                             </div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4"></div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
-                                <label for="strasse" class="form-label profile-label">Strasse</label>
+                                <label for="strasse" class="form-label profile-label">Strasse <span class="text-danger"><b>*</b></span></label>
                                 <input type="text" name="strasse" class="form-control profile-input shadow-none" value="" placeholder="Beispielstrasse" required>
                             </div>
 
                             <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-12 col-xs-12 mb-3">
-                                <label for="hausnummer" class="form-label profile-label">Hausnr.</label>
+                                <label for="hausnummer" class="form-label profile-label">Nr. <span class="text-danger"><b>*</b></span></label>
                                 <input type="number" name="hausnummer" class="form-control profile-input shadow-none" value="" placeholder="5" required>
                             </div>
 
                             <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-sm-12 col-xs-12 mb-3">
-                                <label for="plz" class="form-label profile-label">PLZ</label>
+                                <label for="plz" class="form-label profile-label">PLZ <span class="text-danger"><b>*</b></span></label>
                                 <input type="text" name="plz" class="form-control profile-input shadow-none" value="" placeholder="4055" required>
                             </div>
 
                             <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12 mb-3">
-                                <label for="ort" class="form-label profile-label">Ort</label>
+                                <label for="ort" class="form-label profile-label">Ort <span class="text-danger"><b>*</b></span></label>
                                 <input type="text" name="ort" class="form-control profile-input shadow-none" value="" placeholder="Basel" required>
                             </div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4"></div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
-                                <label for="email" class="form-label profile-label">Email-Adresse</label>
+                                <label for="email" class="form-label profile-label">Email-Adresse <span class="text-danger"><b>*</b></span></label>
                                 <input type="email" name="email" class="form-control profile-input shadow-none" value="" placeholder="max@domain.ch" required>
                             </div>
 
@@ -71,7 +71,7 @@
                             <div class="col-xxl-4 col-xl-4 col-lg-4"></div>
 
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3">
-                                <label for="geburtsdatum" class="form-label profile-label">Geburtsdatum</label>
+                                <label for="geburtsdatum" class="form-label profile-label">Geburtsdatum <span class="text-danger"><b>*</b></span></label>
                                 <input type="date" name="geburtsdatum" class="form-control profile-input shadow-none" value="" placeholder="max@domain.ch" required>
                             </div>
 

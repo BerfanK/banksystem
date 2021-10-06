@@ -70,7 +70,7 @@ function print_danger_raw($message) {
 function login($contractNr, $password) {
     global $conn;
 
-    $statement = $conn->prepare("SELECT * FROM account WHERE Vertragsnummer = ?");
+    $statement = $conn->prepare("SELECT k.Vertragsnummer, k.Passwort, k.FirstTime, k.Id AS KundeId, k.Vorname, k.Nachname, k.Adresse, k.Postleitzahl, k.Ort, k.Email, k.Telefonnummer, k.Geburtsdatum, k.Geschlecht FROM kunde AS k WHERE k.Vertragsnummer = ? ORDER BY k.Id");
     $statement->bind_param("s", $contractNr);
     $statement->execute();
 
@@ -78,14 +78,22 @@ function login($contractNr, $password) {
     $row = $result->fetch_assoc();
 
     $dbPassword = $row["Passwort"];
-    echo $contractNr;
 
     if (password_verify($password, $dbPassword)) { // Password correct!
 
         $_SESSION["logged_in"] = true;
-        $_SESSION["account_id"] = $row["Id"];
         $_SESSION["customer_id"] = $row["KundeId"];
         $_SESSION["contract_number"] = $contractNr;
+        $_SESSION["first_time"] = $row["FirstTime"];
+        $_SESSION["firstname"] = $row["Vorname"];
+        $_SESSION["lastname"] = $row["Nachname"];
+        $_SESSION["birthdate"] = $row["Geburtsdatum"];
+        $_SESSION["phone"] = $row["Telefonnummer"];
+        $_SESSION["email"] = $row["Email"];
+        $_SESSION["gender"] = $row["Geschlecht"];
+        $_SESSION["adress"] = $row["Adresse"];
+        $_SESSION["zip"] = $row["Postleitzahl"];
+        $_SESSION["location"] = $row["Ort"];
 
         print_success_raw("Sie werden in <span id='counter' class='fw-bold'>3</span> Sekunde(n) weitergeleitet!");
 
@@ -178,29 +186,150 @@ function register($firstname, $lastname, $adress, $house, $zip, $location, $emai
     }
 
     $adress = $adress . " " . $house;
-    $statement = $conn->prepare("INSERT INTO kunde(Vorname, Nachname, Adresse, Postleitzahl, Ort, Email, Telefonnummer, Geburtsdatum, Geschlecht) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $statement->bind_param("sssssssss", $firstname, $lastname, $adress, $zip, $location, $email, $phone, $birthdate, $gender);
+
+    $randomPassword = random_string(15);
+    $randomPasswordHashed = password_hash($randomPassword, PASSWORD_DEFAULT);
+    $randomContract = random_contract(10);
+
+    $statement = $conn->prepare("INSERT INTO kunde(Vertragsnummer, Vorname, Nachname, Adresse, Postleitzahl, Ort, Email, Telefonnummer, Geburtsdatum, Geschlecht, Passwort) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $statement->bind_param("sssssssssss", $randomContract, $firstname, $lastname, $adress, $zip, $location, $email, $phone, $birthdate, $gender, $randomPasswordHashed);
     
     
     if ($statement->execute()) {
-
-        $kundeId = $conn->insert_id;
-        $randomPassword = random_string(15);
-        $randomPasswordHashed = password_hash($randomPassword, PASSWORD_DEFAULT);
-        $randomContract = random_contract(10);
-
-        
-        $stmt = $conn->prepare("INSERT INTO account (KundeId, Vertragsnummer, Passwort) VALUES(?, ?, ?)");
-        $stmt->bind_param("iss", $kundeId, $randomContract, $randomPasswordHashed);
-        $stmt->execute();
-        
         send_mail($email, "$firstname $lastname", $randomContract, $randomPassword);
-
         print_success_raw("Konto erstellt! Bitte überprüfen Sie Ihre Mail.");
     } else {
         print_danger_raw("Ihr Konto konnte nicht erstellt werden.");
     }
     
+
+}
+
+/**
+ * This function updates the personal info.
+ * @param kundeId The id of the user
+ * @param firstname The users firstname
+ * @param lastname The users lastname
+ * @param adress The users adress 
+ * @param house The users house number
+ * @param zip The users zip code
+ * @param location The users location
+ * @param email The users email
+ * @param phone The users phone number
+ * @param birthdate The users birthdate
+ * @param gender The users gender
+ */
+function update_data($kundeId, $firstname, $lastname, $adress, $house, $zip, $location, $email, $phone, $birthdate, $gender) {
+    global $conn;
+
+    if ($email != $_SESSION["email"] && email_exists($email)) {
+        print_danger_raw("Die Email-Adresse existiert bereits.");
+        return;
+    }
+
+    if (strlen($firstname) > 35) {
+        print_danger_raw("Der Vorname darf maximal 35 Zeichen enthalten!");
+        return;
+    }
+
+    if (strlen($lastname) > 35) {
+        print_danger_raw("Der Nachname darf maximal 35 Zeichen enthalten!");
+        return;
+    }
+
+    if (strlen($adress . " " . $house) > 75) {
+        print_danger_raw("Die Adresse darf maximal 75 Zeichen enthalten!");
+        return;
+    }
+
+    if (strlen($location) > 25) {
+        print_danger_raw("Der Ort darf maximal 25 Zeichen enthalten!");
+        return;
+    }
+
+    if (strlen($email) > 100) {
+        print_danger_raw("Die Email darf maximal 100 Zeichen enthalten!");
+        return;
+    }
+
+    if ($phone != null && !is_phone($phone)) {
+        print_danger_raw("Die Telefonnummer ist ungültig!");
+        return;
+    }
+    
+    $age = get_age($birthdate);
+
+    if ($age < 16 || $age > 122) {
+        print_danger_raw("Bitte geben Sie ein gültiges Geburtsdatum an.");
+        return;
+    }
+
+    $adress = $adress . " " . $house;
+    $statement = $conn->prepare("UPDATE kunde SET Vorname = ?, Nachname = ?, Adresse = ?, Postleitzahl = ?, Ort = ?, Email = ?, Telefonnummer = ?, Geburtsdatum = ?, Geschlecht = ? WHERE Id = ?");
+    $statement->bind_param("sssssssssi", $firstname, $lastname, $adress, $zip, $location, $email, $phone, $birthdate, $gender, $kundeId);
+    
+    $_SESSION["firstname"] = $firstname;
+    $_SESSION["lastname"] = $lastname;
+    $_SESSION["birthdate"] = $birthdate;
+    $_SESSION["phone"] = $phone;
+    $_SESSION["email"] = $email;
+    $_SESSION["gender"] = $gender;
+    $_SESSION["adress"] = $adress;
+    $_SESSION["zip"] = $zip;
+    $_SESSION["location"] = $location;
+    
+    if ($statement->execute()) {
+        print_success("Ihre persönlichen Daten wurden aktualisiert!");
+    } else {
+        print_danger("Ihre persönlichen Daten konnten nicht aktualisiert werden.");
+    }
+    
+
+}
+
+
+/**
+ * Change the password of an account.
+ * @param contractNr The contract of the account
+ * @param password The new password
+ */
+function change_password($contractNr, $password) {
+    global $conn;
+
+    if (strlen($password) < 8) {
+        print_danger_raw("Ihr Passwort muss mind. 8 Zeichen enthalten.");
+        return;
+    }
+
+    $pwHashed = password_hash($password, PASSWORD_DEFAULT);
+
+    $statement = $conn->prepare("UPDATE kunde SET Passwort = ?, FirstTime = 0 WHERE Vertragsnummer = ?");
+    $statement->bind_param("ss", $pwHashed, $contractNr);
+    
+    if ($statement->execute()) {
+        $_SESSION["first_time"] = 0;
+        print_success_raw("Password wurde geändert!<br>Sie werden in <span id='counter' class='fw-bold'>3</span> Sekunde(n) weitergeleitet!");
+
+        echo
+        '
+        <script>
+            var x, secs = 2;
+            x = setInterval(myFunc, 1000);
+
+            function myFunc() {
+                document.getElementById(\'counter\').innerHTML =  secs;
+                secs --;
+                if(secs == -1){
+                    document.getElementById(\'counter\').innerHTML = "0";
+                    clearInterval(x);
+                    window.location.href = "./";
+                }
+            }
+        </script>
+        ';
+    } else {
+        print_danger_raw("Ihr Passwort konnte nicht geändert werden.");
+    }
 
 }
 
@@ -271,6 +400,48 @@ function random_string($length = 10) {
  */
 function random_contract($length = 12) {
     $characters = '0123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+/**
+ * This function generates a number.
+ * @param length The amount of characters.
+ */
+function random_numbers($length = 12) {
+    $characters = '0123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+/**
+ * This function generates letters.
+ * @param length The amount of characters.
+ */
+function random_letters_capital($length = 12) {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+/**
+ * This function generates letters.
+ * @param length The amount of characters.
+ */
+function random_letters_lower($length = 12) {
+    $characters = 'abcdefghijklmnopqrstuvwxyz';
     $charactersLength = strlen($characters);
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
@@ -452,7 +623,14 @@ function send_mail($address, $name, $contract, $password) {
                   border-bottom-left-radius:0
               }
           }
-    
+
+          .row{--bs-gutter-x:1.5rem;--bs-gutter-y:0;display:flex;flex-wrap:wrap;margin-top:calc(-1 * var(--bs-gutter-y));margin-right:calc(-.5 * var(--bs-gutter-x));margin-left:calc(-.5 * var(--bs-gutter-x))}
+          .col-sm{flex:1 0 0%}.row-cols-sm-auto>*{flex:0 0 auto;width:auto}.row-cols-sm-1>*{flex:0 0 auto;width:100%}.row-cols-sm-2>*{flex:0 0 auto;width:50%}.row-cols-sm-3>*{flex:0 0 auto;width:33.3333333333%}.row-cols-sm-4>*{flex:0 0 auto;width:25%}.row-cols-sm-5>*{flex:0 0 auto;width:20%}.row-cols-sm-6>*{flex:0 0 auto;width:16.6666666667%}.col-sm-auto{flex:0 0 auto;width:auto}.col-sm-1{flex:0 0 auto;width:8.33333333%}.col-sm-2{flex:0 0 auto;width:16.66666667%}.col-sm-3{flex:0 0 auto;width:25%}.col-sm-4{flex:0 0 auto;width:33.33333333%}.col-sm-5{flex:0 0 auto;width:41.66666667%}.col-sm-6{flex:0 0 auto;width:50%}.col-sm-7{flex:0 0 auto;width:58.33333333%}.col-sm-8{flex:0 0 auto;width:66.66666667%}.col-sm-9{flex:0 0 auto;width:75%}.col-sm-10{flex:0 0 auto;width:83.33333333%}.col-sm-11{flex:0 0 auto;width:91.66666667%}.col-sm-12{flex:0 0 auto;width:100%}.offset-sm-0{margin-left:0}
+          .col-md{flex:1 0 0%}.row-cols-md-auto>*{flex:0 0 auto;width:auto}.row-cols-md-1>*{flex:0 0 auto;width:100%}.row-cols-md-2>*{flex:0 0 auto;width:50%}.row-cols-md-3>*{flex:0 0 auto;width:33.3333333333%}.row-cols-md-4>*{flex:0 0 auto;width:25%}.row-cols-md-5>*{flex:0 0 auto;width:20%}.row-cols-md-6>*{flex:0 0 auto;width:16.6666666667%}.col-md-auto{flex:0 0 auto;width:auto}.col-md-1{flex:0 0 auto;width:8.33333333%}.col-md-2{flex:0 0 auto;width:16.66666667%}.col-md-3{flex:0 0 auto;width:25%}.col-md-4{flex:0 0 auto;width:33.33333333%}.col-md-5{flex:0 0 auto;width:41.66666667%}.col-md-6{flex:0 0 auto;width:50%}.col-md-7{flex:0 0 auto;width:58.33333333%}.col-md-8{flex:0 0 auto;width:66.66666667%}.col-md-9{flex:0 0 auto;width:75%}.col-md-10{flex:0 0 auto;width:83.33333333%}.col-md-11{flex:0 0 auto;width:91.66666667%}.col-md-12{flex:0 0 auto;width:100%}
+          .col-lg{flex:1 0 0%}.row-cols-lg-auto>*{flex:0 0 auto;width:auto}.row-cols-lg-1>*{flex:0 0 auto;width:100%}.row-cols-lg-2>*{flex:0 0 auto;width:50%}.row-cols-lg-3>*{flex:0 0 auto;width:33.3333333333%}.row-cols-lg-4>*{flex:0 0 auto;width:25%}.row-cols-lg-5>*{flex:0 0 auto;width:20%}.row-cols-lg-6>*{flex:0 0 auto;width:16.6666666667%}.col-lg-auto{flex:0 0 auto;width:auto}.col-lg-1{flex:0 0 auto;width:8.33333333%}.col-lg-2{flex:0 0 auto;width:16.66666667%}.col-lg-3{flex:0 0 auto;width:25%}.col-lg-4{flex:0 0 auto;width:33.33333333%}.col-lg-5{flex:0 0 auto;width:41.66666667%}.col-lg-6{flex:0 0 auto;width:50%}.col-lg-7{flex:0 0 auto;width:58.33333333%}.col-lg-8{flex:0 0 auto;width:66.66666667%}.col-lg-9{flex:0 0 auto;width:75%}.col-lg-10{flex:0 0 auto;width:83.33333333%}.col-lg-11{flex:0 0 auto;width:91.66666667%}.col-lg-12{flex:0 0 auto;width:100%}
+          .col-xl-auto{flex:0 0 auto;width:auto}.col-xl-1{flex:0 0 auto;width:8.33333333%}.col-xl-2{flex:0 0 auto;width:16.66666667%}.col-xl-3{flex:0 0 auto;width:25%}.col-xl-4{flex:0 0 auto;width:33.33333333%}.col-xl-5{flex:0 0 auto;width:41.66666667%}.col-xl-6{flex:0 0 auto;width:50%}.col-xl-7{flex:0 0 auto;width:58.33333333%}.col-xl-8{flex:0 0 auto;width:66.66666667%}.col-xl-9{flex:0 0 auto;width:75%}.col-xl-10{flex:0 0 auto;width:83.33333333%}.col-xl-11{flex:0 0 auto;width:91.66666667%}.col-xl-12{flex:0 0 auto;width:100%}
+          .col-xxl{flex:1 0 0%}.row-cols-xxl-auto>*{flex:0 0 auto;width:auto}.row-cols-xxl-1>*{flex:0 0 auto;width:100%}.row-cols-xxl-2>*{flex:0 0 auto;width:50%}.row-cols-xxl-3>*{flex:0 0 auto;width:33.3333333333%}.row-cols-xxl-4>*{flex:0 0 auto;width:25%}.row-cols-xxl-5>*{flex:0 0 auto;width:20%}.row-cols-xxl-6>*{flex:0 0 auto;width:16.6666666667%}.col-xxl-auto{flex:0 0 auto;width:auto}.col-xxl-1{flex:0 0 auto;width:8.33333333%}.col-xxl-2{flex:0 0 auto;width:16.66666667%}.col-xxl-3{flex:0 0 auto;width:25%}.col-xxl-4{flex:0 0 auto;width:33.33333333%}.col-xxl-5{flex:0 0 auto;width:41.66666667%}.col-xxl-6{flex:0 0 auto;width:50%}.col-xxl-7{flex:0 0 auto;width:58.33333333%}.col-xxl-8{flex:0 0 auto;width:66.66666667%}.col-xxl-9{flex:0 0 auto;width:75%}.col-xxl-10{flex:0 0 auto;width:83.33333333%}.col-xxl-11{flex:0 0 auto;width:91.66666667%}.col-xxl-12{flex:0 0 auto;width:100%}
+
           .container,.container-fluid,.container-lg,.container-md,.container-sm,.container-xl,.container-xxl{
               width:100%;
               padding-right:var(--bs-gutter-x,.75rem);
@@ -588,34 +766,46 @@ function send_mail($address, $name, $contract, $password) {
     
     <body style="background-color: white;">
     
-      <div class="container justify-content-between w-35">
+      <div class="container justify-content-between">
     
-        <div class="card p-4 m-2" style="border: 1px solid #827f7f;">
-          <div class="card-body">
-    
-              <div class="mail-title">Ihre Anmeldedaten</div>
-              <div class="mail-address">'. $address .'</div>
-              <hr class="mail-divider">
-    
-              <div class="mail-text" style="margin-bottom: 2rem;">
-                Es freut uns, dass Sie sich für uns entschieden haben. Ihr Konto wurde erfolgreich erstellt und 
-                steht zur Aktivierung bereit. Nutzen Sie die folgenden Daten fürs Anmelden, anschliessend werden 
-                Sie darum gebeten, Ihr Passwort zu ändern.
-              </div>
-    
-              <span class="mail-field">Vertragsnummer:</span><span class="mail-value">'. $contract .'</span><br>
-              <span class="mail-field">Passwort:</span><span class="mail-value">'. $password .'</span>
-    
-              <div class="mail-text" style="margin-top: 2rem;">
-                Sollten Fragen auftreten, antworten Sie einfach auf diese Mail.<br><br>
-                Beste Grüsse,<br>
-                BBK-Team
-              </div>
-    
-          </div>
+        <div class="row">
+
+        <div class="col-xxl-3"></div>
+
+        <div class="col-xxl-6 w-100">
+
+            <div class="card p-4 m-2" style="border: 1px solid #827f7f;">
+                <div class="card-body">
+
+                    <div class="mail-title">Ihre Anmeldedaten</div>
+                    <div class="mail-address">'. $address .'</div>
+                    <hr class="mail-divider">
+
+                    <div class="mail-text" style="margin-bottom: 2rem;">
+                    Es freut uns, dass Sie sich für uns entschieden haben. Ihr Konto wurde erfolgreich erstellt und 
+                    steht zur Aktivierung bereit. Nutzen Sie die folgenden Daten fürs Anmelden, anschliessend werden 
+                    Sie darum gebeten, Ihr Passwort zu ändern.
+                    </div>
+
+                    <span class="mail-field">Vertragsnummer:</span><span class="mail-value">'. $contract .'</span><br>
+                    <span class="mail-field">Passwort:</span><span class="mail-value">'. $password .'</span>
+
+                    <div class="mail-text" style="margin-top: 2rem;">
+                    Sollten Fragen auftreten, antworten Sie einfach auf diese Mail.<br><br>
+                    Beste Grüsse,<br>
+                    BBK-Team
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mail-footer">© 2021 BBK Alle Rechte vorbehalten.</div>
+
         </div>
-    
-        <div class="mail-footer">© 2021 BBK Alle Rechte vorbehalten.</div>
+
+        <div class="col-xxl-3"></div>
+
+        </div>
     
       </div>
       

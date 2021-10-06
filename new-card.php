@@ -12,6 +12,15 @@
             <div class="page-description">Hier können Sie ein Konto eröffnen.</div>
             <hr class="page-divider">
 
+            <?php
+
+            if (isset($_POST["submit"]) && isset($_POST["konto"])) {
+                create_card($_SESSION["customer_id"], $_POST["konto"]);
+            }
+
+
+            ?>
+
             <div class="profile-title">Formular ausfüllen</div>
 
             <form action="" autocomplete="off" class="my-5 needs-validation" method="post" novalidate>
@@ -21,12 +30,12 @@
                     <!-- Col -->
                     <div class="col-12 w-50 mb-4">
 
-                        <label for="" class="new-card-label">Welche Art von Konto möchten Sie eröffnen? <b><span class="text-danger">*</span></b></label>
-                        <select name="" id="" class="form-control custom-select profile-input shadow-none" required>
+                        <label for="konto" class="new-card-label">Welche Art von Konto möchten Sie eröffnen? <b><span class="text-danger">*</span></b></label>
+                        <select name="konto" id="konto" class="form-control custom-select profile-input shadow-none" required>
                             <option value="">Bitte auswählen</option>
-                            <option value="1">Girokonto</option>
-                            <option value="2">Sparkonto</option>
-                            <option value="3">Prepaidkonto</option>
+                            <option value="Giro">Girokonto</option>
+                            <option value="Spar">Sparkonto</option>
+                            <option value="Prepaid">Prepaidkonto</option>
                         </select>
                         <div class="invalid-feedback">
                             Bitte wählen Sie ein Konto aus.
@@ -54,7 +63,7 @@
                     <!-- Col -->
                     <div class="col-12 mb-5">
 
-                        <button class="btn btn-success shadow-none">Eröffnen</button>
+                        <button type="submit" name="submit" class="btn btn-success shadow-none">Eröffnen</button>
 
                     </div>
                     <!-- End Col -->

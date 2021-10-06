@@ -46,7 +46,14 @@ $filename = basename($path, ".php");
 
                 <li class="nav-item dropdown">
                     <a class="nav-link <?php if ($filename === 'profile' || $filename === 'new-card') echo "active"; ?>" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle fs-5"></i>&nbsp; Berfan K.
+                        <i class="fas fa-user-circle fs-5"></i>&nbsp; <?php 
+                        
+                        $firstname = $_SESSION["firstname"];
+                        $lastname = $_SESSION["lastname"];
+
+                        echo $firstname . " " . $lastname[0] . ".";
+
+                        ?>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="./profile"><i class="fas fa-user fs-6 me-1"></i>&nbsp; Profil</a></li>

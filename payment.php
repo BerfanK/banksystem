@@ -15,6 +15,7 @@ if ($action === 'exchange') {
     $descriptionHtml = "Senden Sie Geld an ein anderes Konto.";
 }
 
+$cardId = $_GET["id"];
 
 ?>
 

@@ -364,6 +364,16 @@ body {
   color: white;
 }
 
+.profile-input:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  font-family: "Yaldevi", Arial, Helvetica, sans-serif;
+  background-color: #3a3f47;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .profile-setting-title {
   font-family: "Lato", Arial, Helvetica, sans-serif;
   font-size: 17px;

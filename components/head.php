@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <head>
 
     <!-- Meta -->
@@ -33,5 +35,6 @@
 
     <?php include_once "includes/connection.php"; ?>
     <?php include_once "includes/methods.php"; ?>
+    <?php include_once "includes/auth.php"; ?>
 
 </head>

@@ -1,3 +1,9 @@
+<?php
+
+$card = 
+
+?>
+
 <form action="" autocomplete="off" class="my-5 needs-validation" method="post" novalidate>
 
     <div class="row">
